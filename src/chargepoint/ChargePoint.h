@@ -111,6 +111,9 @@ class ChargePoint : public IChargePoint,
     /** @copydoc ocpp::types::ChargePointStatus IChargePoint::getConnectorStatus(unsigned int) */
     ocpp::types::ChargePointStatus getConnectorStatus(unsigned int connector_id) override;
 
+    /** @copydoc int IChargePoint::getConnectorTransactionID(unsigned int) */
+    int getConnectorTransactionID(unsigned int connector_id) override;
+
     /** @copydoc bool IChargePoint::statusNotification(unsigned int,
      *                                                 ocpp::types::ChargePointStatus,
      *                                                 ocpp::types::ChargePointErrorCode,
@@ -163,6 +166,9 @@ class ChargePoint : public IChargePoint,
 
     /** @copydoc bool IChargePoint::logSecurityEvent(const std::string&, const std::string&, bool) */
     bool logSecurityEvent(const std::string& type, const std::string& message, bool critical) override;
+
+    /** @copydoc void IChargePoint::logUserEvent(const std::string& msg) */
+    void logUserEvent(const std::string& msg) override;
 
     /** @copydoc bool IChargePoint::clearSecurityEvents() */
     bool clearSecurityEvents() override;

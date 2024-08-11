@@ -129,6 +129,13 @@ class IChargePoint
     virtual ocpp::types::ChargePointStatus getConnectorStatus(unsigned int connector_id) = 0;
 
     /**
+     * @brief Get the transaction Id of a connector
+     * @param connector_id Id of the connector
+     * @return transaction Id of the connector
+     */
+    virtual int getConnectorTransactionID(unsigned int connector_id) = 0;
+
+    /**
      * @brief Notify a new status for a connector
      * @param connector_id Id of the connector
      * @param status Status of the connector
@@ -226,6 +233,13 @@ class IChargePoint
      * @return true if the security evenst has been logged, false otherwise
      */
     virtual bool logSecurityEvent(const std::string& type, const std::string& message, bool critical = false) = 0;
+
+    /**
+     * @brief Log a user event
+     * @param message about the occurred user event
+     * @return true if the security evenst has been logged, false otherwise
+     */
+    virtual void logUserEvent(const std::string& msg) = 0;
 
     /**
      * @brief Clear all the security events

@@ -456,6 +456,22 @@ ocpp::types::ChargePointStatus ChargePoint::getConnectorStatus(unsigned int conn
     return status;
 }
 
+/** @copydoc int IChargePoint::getConnectorTransactionID(unsigned int) */
+int ChargePoint::getConnectorTransactionID(unsigned int connector_id)
+{
+    int transaction_id = 0;
+    Connector* connector = m_connectors.getConnector(connector_id);
+    if (connector)
+    {
+        transaction_id = connector->transaction_id;
+    }
+    else
+    {
+        LOG_ERROR << "Invalid connector id : " << connector_id;
+    }
+    return transaction_id;
+}
+
 /** @copydoc bool IChargePoint::statusNotification(unsigned int,
  *                                                 ocpp::types::ChargePointStatus,
  *                                                 ocpp::types::ChargePointErrorCode,
@@ -700,6 +716,12 @@ bool ChargePoint::notifyFirmwareUpdateStatus(bool success)
 bool ChargePoint::logSecurityEvent(const std::string& type, const std::string& message, bool critical)
 {
     return m_security_manager.logSecurityEvent(type, message, critical);
+}
+
+/** @copydoc void IChargePoint::logUserEvent(const std::string&) */
+void ChargePoint::logUserEvent(const std::string& msg)
+{
+    LOG_DEBUG << "USER: " << msg;
 }
 
 /** @copydoc bool IChargePoint::clearSecurityEvents() */
