@@ -138,8 +138,15 @@ bool AuthentLocalList::handleMessage(const ocpp::messages::SendLocalListReq& req
                     {
                         response.status = UpdateStatus::Accepted;
 
-                        // Update local list version
-                        m_local_list_version = request.listVersion;
+                        // Update local list version                      
+                        if(request.localAuthorizationList.empty())
+                        {
+                            m_local_list_version = 0;
+                        }
+                        else
+                        {
+                            m_local_list_version = request.listVersion;
+                        }
                         if (!m_internal_config.setKey(LOCAL_LIST_VERSION_KEY, std::to_string(m_local_list_version)))
                         {
                             LOG_ERROR << "Unable to save authent local list version";
@@ -161,7 +168,14 @@ bool AuthentLocalList::handleMessage(const ocpp::messages::SendLocalListReq& req
                             response.status = UpdateStatus::Accepted;
 
                             // Update local list version
-                            m_local_list_version = request.listVersion;
+                            if(request.localAuthorizationList.empty())
+                            {
+                                m_local_list_version = 0;
+                            }
+                            else
+                            {
+                                m_local_list_version = request.listVersion;
+                            }
                             if (!m_internal_config.setKey(LOCAL_LIST_VERSION_KEY, std::to_string(m_local_list_version)))
                             {
                                 LOG_ERROR << "Unable to save authent local list version";
