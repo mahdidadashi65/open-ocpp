@@ -150,8 +150,8 @@ void OcppConfig::getConfiguration(const std::vector<ocpp::types::CiStringType<50
                     value = m_config.get(STACK_PARAMS, param.first);
                 }
                 key_value.value.value().assign(value.toString());
+                values.push_back(key_value);
             }
-            values.push_back(key_value);
         }
     }
     else
@@ -177,8 +177,8 @@ void OcppConfig::getConfiguration(const std::vector<ocpp::types::CiStringType<50
                         value = m_config.get(STACK_PARAMS, it->first);
                     }
                     key_value.value.value().assign(value.toString());
+                    values.push_back(key_value);
                 }
-                values.push_back(key_value);
             }
             else
             {
